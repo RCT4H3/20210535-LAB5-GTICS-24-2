@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear nuevo viaje</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img th:src="@{static/travel_can_logo.png}" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{listaLugares}">Lugares></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{listaMascotas}">Mascotas</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{listaViajes}">Viajes</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<form action="/crearViaje" method="post">
+    <h1>Crear nuevo viaje</h1>
+
+    <h3>Punto de recojo</h3>
+    <input type="text" name="puntoRecojo">
+    <h3>Cantidad de personas</h3>
+    <input type="number" name="cantPersonas">
+    <h3>Cantidad de perros</h3>
+    <input type="number" name="cantPerros">
+    <h3>Seleccione un titular del viaje</h3>
+    <select id="persona" name="persona">
+        <option disabled selected>Selecciona un opcion</option>
+        <option th:each="persona : ${listaPersonas}" th:value="${persona.getIdPesona()}" th:text="${persona.getNombre()}"></option>
+    </select>
+    <h3>Seleccione un lugar</h3>
+    <select id="lugares" name="lugares">
+        <option disabled selected>Selecciona un opcion</option>
+        <option th:each="lugar : ${listaLugares}" th:value="${lugar.getIdLugares()}" th:text="${lugar.getNombreLugar()}"></option>
+    </select>
+    <button type="submit">Crear</button>
+</form>
+</body>
+</html>

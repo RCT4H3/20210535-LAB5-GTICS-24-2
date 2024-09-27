@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de mascotas</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img th:src="@{static/travel_can_logo.png}" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{listaLugares}">Lugares></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{listaMascotas}">Mascotas</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{listaViajes}">Viajes</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<table>
+    <thead>
+    <tr>
+        <th>Nombre Mascota</th>
+        <th>Genero</th>
+        <th>Edad</th>
+        <th>Fecha de nacimiento</th>
+        <th>Vacunado</th>
+        <th>Desparacitado</th>
+        <td>Dueño mascota</td>
+        <td>Ver detalle</td>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mascota : ${listaMascotas}">
+        <td th:text="${mascota.getNombreMascota()}"></td>
+        <td th:text="${mascota.getGenero()}"></td>
+        <td th:text="${mascota.getEdad()}"></td>
+        <td th:text="${mascota.getFechaNacimiento()}"></td>
+        <td th:text="${mascota.getVacunado()}"></td>
+        <td th:text="${mascota.getDesparasitado()}"></td>
+        <td th:text="${mascota.getPersona().getNombre()}"></td>
+        <td>
+            <div class="dropdown">
+                <div>
+                    <a  th:href="@{/verMascota/{id}(id=${mascota.getIdMascotas()})}">Ver</a>
+                    <a  th:href="@{/editarMascota/{id}(id=${mascota.getIdMascotas()})}">Editar</a>
+                    <a  th:href="@{/borrarMascota/{id}(id=${mascota.getIdMascotas()})}">Borrar</a>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+    <a th:href="@{/nuevoMascota}">Agregar Mascota</a>
+</table>
+</body>
+</html>
